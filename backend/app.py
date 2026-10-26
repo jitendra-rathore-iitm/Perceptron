@@ -9,6 +9,15 @@ import state
 
 app = Flask(__name__)
 
+_counts = questions.bank_counts()
+print(
+    f"Fraction bank: {_counts['placement']} placement + {_counts['practice']} practice questions "
+    f"(L1: {_counts['levels'].get(1, 0)}, L2: {_counts['levels'].get(2, 0)}, L3: {_counts['levels'].get(3, 0)})",
+    flush=True,
+)
+if _counts["placement"] < 6 or any(_counts["levels"].get(level, 0) < 8 for level in (1, 2, 3)):
+    print("WARNING: question bank is below the planned 6 + 8-per-level minimum.")
+
 
 def error(code, description, status):
     return jsonify({"error": {"code": code, "description": description}}), status

@@ -7,18 +7,65 @@ from config import HONEY_AFTER_HINT, HONEY_FIRST_TRY, daily_cap
 
 BANK_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "fractions.json")
 
-with open(BANK_PATH, encoding="utf-8") as f:
-    bank = json.load(f)
 
-practice_by_level = {int(k): v for k, v in bank["levels"].items()}
-all_practice = {q["id"]: q for level in practice_by_level.values() for q in level if q}
-placement_by_id = {q["id"]: q for q in bank["placement"]}
+def valid_question(q):
+    return (
+        isinstance(q, dict)
+        and isinstance(q.get("id"), str)
+        and bool(q["id"].strip())
+        and isinstance(q.get("level"), int)
+        and isinstance(q.get("text"), str)
+        and bool(q["text"].strip())
+        and isinstance(q.get("options"), list)
+        and len(q["options"]) == 4
+        and all(isinstance(o, str) and o.strip() for o in q["options"])
+        and isinstance(q.get("correct"), int)
+        and 0 <= q["correct"] < 4
+        and isinstance(q.get("hints"), list)
+        and len(q["hints"]) == 3
+        and all(isinstance(h, str) and h.strip() for h in q["hints"])
+        and isinstance(q.get("explanation"), str)
+        and bool(q["explanation"].strip())
+    )
+
+
+def load_bank(path):
+    with open(path, encoding="utf-8") as f:
+        raw = json.load(f)
+    placement = [
+        q
+        for q in raw.get("placement", [])
+        if valid_question(q) and isinstance(q.get("order"), int)
+    ]
+    levels = {}
+    for key, items in raw.get("levels", {}).items():
+        levels[int(key)] = [q for q in items if valid_question(q)]
+    return placement, levels
+
+
+placement_list_raw, practice_by_level = load_bank(BANK_PATH)
+placement_by_id = {}
+for q in placement_list_raw:
+    placement_by_id.setdefault(q["id"], q)
+all_practice = {}
+for level in practice_by_level.values():
+    for q in level:
+        all_practice.setdefault(q["id"], q)
 
 HINT_KINDS = ["nudge", "steps", "worked"]
 
 
+def bank_counts():
+    return {
+        "placement": len(placement_list_raw),
+        "practice": len(all_practice),
+        "levels": {k: len(v) for k, v in practice_by_level.items()},
+        "skipped": 0,
+    }
+
+
 def placement_list():
-    ordered = sorted(bank["placement"], key=lambda q: q["order"])
+    ordered = sorted(placement_list_raw, key=lambda q: q["order"])
     return [
         {
             "id": q["id"],

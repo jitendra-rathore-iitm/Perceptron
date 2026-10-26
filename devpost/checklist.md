@@ -59,7 +59,7 @@ Build mode: learn (learner asked for step-by-step building with verification and
   Learner check: Take the placement check fresh, skip strategically, and read your result; refresh mid-check and confirm you land where you left off.
   Commit: `Slice 5: placement check with resume and result`
 
-- [ ] **6. Full question banks: 24 + 6, genuinely written**
+- [x] **6. Full question banks: 24 + 6, genuinely written**
   Becomes usable: All 3 levels have 8 real practice questions each, every question carries its three authored hint steps and explanation, the bank recycles shuffled without empty screens, and the startup count check prints 6 + 24.
   Why now: The demo says "one subject done well" — content quality is the product, and authoring as its own slice keeps it honest rather than skimmed mid-slice.
   PRD ref: `prd.md > Question Banks`, `prd.md > Open Questions` (hint wording direction)
@@ -118,3 +118,5 @@ Activity mode: [to record at wrap-up]
 - [Navbar copy made self-explanatory ("Honey: N" instead of "N drops"; "Dyslexia" button instead of the cryptic "aA" glyph), logo underline removed, speech rate raised to 1.15] — learner checkpoint feedback; copy clarity matters for the 12–18 audience.
 - [Slice 6 question banks pulled forward: 4 more Level 1 questions and the full Level 2 (8) and Level 3 (8) banks authored] — learner wanted more questions now; full hints and explanations included; Slice 6 keeps its shuffle-recycle shim and counting checks.
 - [Deployment pulled forward from its stretch-goal slot at the learner's request: Vercel frontend + Render free-tier API, connected by a `vercel.json` rewrite so the frontend's relative `/api` addresses work unchanged in every environment] — verified against vercel.com/docs/rewrites and render.com/docs/free; no plan-level scope change (the stretch goal is simply being used), and the SQLite spin-down reset on Render free tier is recorded in spec.md instead of silently accepted.
+- [Slice 6 recycle check adapted: the "9 fetches all unique" test runs on Level 1 (12 questions after the pull-forward); the 8-question levels prove recycling by repeating only after the full pool is seen (8 unique + 1 repeat)] — an 8-question bank cannot yield 9 consecutive unique questions; the shuffle-recycle rule itself is unchanged.
+- [Startup count check reports the real bank (6 placement + 28 practice: L1 12, L2 8, L3 8) and warns below 6 + 8-per-level rather than asserting exactly 6 + 24] — the earlier pull-forward added 4 Level 1 questions, so a hard 24 assertion would fail on a healthy bank.
