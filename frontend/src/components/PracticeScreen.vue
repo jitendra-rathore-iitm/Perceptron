@@ -30,7 +30,7 @@ function toggleReadAloud() {
 </script>
 
 <template>
-  <section class="card" :class="cardClass">
+  <section class="card" :class="cardClass" :key="store.question?.id ?? 'empty'">
     <div v-if="store.loadError" class="error">
       <p>{{ store.loadError }}</p>
       <button class="btn" type="button" @click="loadQuestion">Retry</button>

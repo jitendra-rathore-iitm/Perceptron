@@ -7,10 +7,16 @@
   --green: #88d498;
   --orange: #ffa552;
   --lavender: #b8a9fa;
+  --card: #ffffff;
+  --grid-line: rgba(0, 0, 0, 0.08);
+  --page-bg: color-mix(in srgb, var(--lavender) 36%, var(--off-white));
   --font: Arial, sans-serif;
   --font-size: 18px;
   --line-height: 1.5;
   --letter-spacing: normal;
+  --shadow-sm: 3px 3px 0 var(--black);
+  --shadow-md: 5px 5px 0 var(--black);
+  --shadow-lg: 8px 8px 0 var(--black);
 }
 
 * {
@@ -23,8 +29,20 @@ body {
   font-size: var(--font-size);
   line-height: var(--line-height);
   letter-spacing: var(--letter-spacing);
-  background: var(--off-white);
+  background: var(--page-bg);
   color: var(--black);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .navbar {
@@ -36,51 +54,83 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
   padding: 10px 18px;
   background: var(--yellow);
   border: 3px solid var(--black);
   border-radius: 999px;
-  box-shadow: 4px 4px 0 var(--black);
+  box-shadow: var(--shadow-md);
   z-index: 10;
 }
 
 .logo {
   font-weight: bold;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
 }
 
 .honey {
   font-weight: bold;
   background: var(--orange);
   border: 2px solid var(--black);
-  border-radius: 12px;
+  border-radius: 10px;
   padding: 4px 10px;
   white-space: nowrap;
+}
+
+.honey.bump {
+  animation: honey-bump 0.45s ease;
+}
+
+@keyframes honey-bump {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.22) rotate(-3deg);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .panel-btn {
   font-weight: bold;
   background: var(--sky);
   border: 2px solid var(--black);
-  border-radius: 12px;
+  border-radius: 10px;
   padding: 4px 12px;
   cursor: pointer;
 }
 
 .page {
+  position: relative;
+  z-index: 1;
   max-width: 640px;
   margin: 0 auto;
   padding: 96px 16px 32px;
 }
 
 .card {
-  background: var(--off-white);
+  background: var(--card);
   border: 3px solid var(--black);
-  border-radius: 16px;
-  box-shadow: 6px 6px 0 var(--black);
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
   padding: 28px;
   text-align: center;
-  transition: background 0.2s ease;
+  animation: card-in 0.35s ease-out both;
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .card.is-right {
@@ -102,17 +152,20 @@ body {
 .question {
   font-size: 26px;
   font-weight: bold;
+  letter-spacing: -0.02em;
   margin: 0;
   text-align: left;
+  line-height: 1.35;
 }
 
 .word {
   white-space: pre-wrap;
+  transition: background 0.15s ease;
 }
 
 .word.lit {
   background: var(--yellow);
-  border-radius: 6px;
+  border-radius: 4px;
   padding: 0 2px;
 }
 
@@ -120,15 +173,16 @@ body {
   flex-shrink: 0;
   font-size: 16px;
   padding: 10px 14px;
+  background: var(--sky);
 }
 
 .speech-note {
   margin: 12px auto;
   max-width: 42ch;
   font-size: 16px;
-  background: var(--sky);
+  background: var(--off-white);
   border: 2px solid var(--black);
-  border-radius: 12px;
+  border-radius: 10px;
   padding: 10px 14px;
 }
 
@@ -155,12 +209,28 @@ body {
   font-size: 18px;
   font-weight: bold;
   color: var(--black);
-  background: var(--off-white);
+  background: var(--card);
   border: 3px solid var(--black);
-  border-radius: 12px;
-  box-shadow: 4px 4px 0 var(--black);
+  border-radius: 10px;
+  box-shadow: var(--shadow-sm);
   padding: 14px 16px;
   cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+}
+
+.answer:hover:not(:disabled),
+.btn:hover:not(:disabled) {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 var(--black);
+}
+
+.answer:active:not(:disabled),
+.btn:active:not(:disabled) {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--black);
 }
 
 .answer.selected {
@@ -169,8 +239,17 @@ body {
   transform: translate(2px, 2px);
 }
 
+.answer:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
 .btn {
   background: var(--yellow);
+}
+
+.hint-btn {
+  background: var(--orange);
 }
 
 .answer:focus-visible,
@@ -200,7 +279,7 @@ body {
 .hint {
   background: var(--off-white);
   border: 2px solid var(--black);
-  border-radius: 12px;
+  border-radius: 10px;
   padding: 10px 14px;
 }
 
@@ -217,7 +296,7 @@ body {
 }
 
 .hint.reveal {
-  background: var(--off-white);
+  background: var(--card);
   border-width: 3px;
 }
 

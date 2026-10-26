@@ -8,7 +8,6 @@ export const speech = reactive({
   unavailable: false,
 });
 
-let timer = null;
 let stopped = true;
 
 function wordList(text) {
@@ -22,20 +21,9 @@ function wordList(text) {
   return words;
 }
 
-function highlightAt(charIndex) {
-  for (let i = speech.words.length - 1; i >= 0; i -= 1) {
-    if (speech.words[i].start <= charIndex) {
-      speech.highlightIndex = i;
-      return;
-    }
-  }
-  speech.highlightIndex = null;
-}
-
 function finish() {
   speech.speaking = false;
   speech.highlightIndex = null;
-  clearTimeout(timer);
 }
 
 export function setQuestionText(text) {
@@ -50,15 +38,15 @@ export function stopSpeech() {
   stopped = true;
   speech.speaking = false;
   speech.highlightIndex = null;
-  clearTimeout(timer);
   if (speech.supported) {
     window.speechSynthesis.cancel();
   }
 }
 
-function speakWordByWord() {
+function speakEachWord() {
+  stopped = false;
+  speech.speaking = true;
   let index = 0;
-  const synth = window.speechSynthesis;
   const speakNext = () => {
     if (stopped || index >= speech.words.length) {
       finish();
@@ -81,39 +69,9 @@ function speakWordByWord() {
       index += 1;
       speakNext();
     };
-    synth.speak(utterance);
+    window.speechSynthesis.speak(utterance);
   };
-  speech.speaking = true;
   speakNext();
-}
-
-function speakWhole(text) {
-  stopped = false;
-  speech.speaking = true;
-  speech.highlightIndex = null;
-  let sawBoundary = false;
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.onboundary = (event) => {
-    sawBoundary = true;
-    highlightAt(event.charIndex ?? 0);
-  };
-  utterance.onend = () => {
-    if (!stopped) {
-      finish();
-    }
-  };
-  utterance.onerror = () => {
-    if (!stopped) {
-      finish();
-    }
-  };
-  window.speechSynthesis.speak(utterance);
-  timer = setTimeout(() => {
-    if (!stopped && speech.speaking && !sawBoundary) {
-      window.speechSynthesis.cancel();
-      speakWordByWord();
-    }
-  }, 700);
 }
 
 export function speakQuestion(text) {
@@ -123,5 +81,5 @@ export function speakQuestion(text) {
     return;
   }
   setQuestionText(text);
-  speakWhole(text);
+  speakEachWord();
 }

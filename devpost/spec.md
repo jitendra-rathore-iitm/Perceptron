@@ -109,7 +109,7 @@ All JSON. Frontend always sends its `deviceId` (random UUID kept in localStorage
 | `POST /api/placement/answer` | `{deviceId, questionId, selected}` (selected=null = skip) | `{done, placedLevel?}` — outcome stored (`correct`/`wrong`/`skipped`, skipped ≠ wrong); level computed on the 6th; re-submitting the same question returns its stored outcome idempotently |
 | `GET /api/practice/question` `?deviceId=` | — | `{id, level, text, options, hintStep}` — server picks unseen/recycled, resets attempt tracking |
 | `POST /api/hint` | `{deviceId, questionId}` | `{hintStep, hint:{kind, text}}` (1..3; step 4 = reveal block) |
-| `POST /api/check` | `{deviceId, questionId, selected}` | wrong: `{correct:false, hintStep}` · right: `{correct:true, honeyAdded:5\|3\|0, honeyToday, totalHoney, capped}` · after 3 hint steps & wrong again: `{correct:false, revealed:true, correctOption, explanation, honeyAdded:0}` · **idempotent:** a repeat check on the same question returns the stored outcome with `duplicate:true, honeyAdded:0` — honey is never awarded twice |
+| `POST /api/check` | `{deviceId, questionId, selected}` | wrong: `{correct:false, hintStep, hint:{kind, text}}` (the newly revealed step, per `Revisions`) · right: `{correct:true, honeyAdded:5\|3\|0, honeyToday, totalHoney, capped}` · after 3 hint steps & wrong again: `{correct:false, revealed:true, correctOption, explanation, honeyAdded:0}` · **idempotent:** a repeat check on the same question returns the stored outcome with `duplicate:true, honeyAdded:0` — honey is never awarded twice |
 | `POST /api/preferences` | `{deviceId, dyslexia}` | `{dyslexia}` |
 | `POST /api/reset` | `{deviceId}` | `{isNew:true}` — clears all state for the device |
 
