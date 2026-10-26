@@ -39,7 +39,7 @@ Build mode: learn (learner asked for step-by-step building with verification and
   Learner check: Deliberately fail a question and read each step; try to be still-wrong after step 3; confirm honey never decreases and no red appears anywhere.
   Commit: `Slice 3: three-step hints, reveal, never stuck`
 
-- [ ] **4. Everything survives a refresh**
+- [x] **4. Everything survives a refresh**
   Becomes usable: Honey, today's count, level, and the dyslexia preference come back after a reload via `POST /api/session` with a persistent `device_id`; daily cap 50/day with validated dates; `PERCEPTRON_DEMO=1` drops the cap to 15.
   Why now: Persistence is where the data model can be wrong, and the four integrity corrections land here where they're cheapest.
   PRD ref: `prd.md > States and Boundaries`, `prd.md > Honey Economy`

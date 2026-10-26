@@ -1,5 +1,5 @@
 import { reactive } from "vue";
-import { checkAnswer, getPracticeQuestion, revealHint } from "./api";
+import { checkAnswer, getPracticeQuestion, revealHint, startSession } from "./api";
 import { setQuestionText, stopSpeech } from "./speech";
 
 const DEVICE_ID_KEY = "perceptron_device_id";
@@ -11,6 +11,13 @@ function loadDeviceId() {
     localStorage.setItem(DEVICE_ID_KEY, id);
   }
   return id;
+}
+
+function localDate() {
+  const now = new Date();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  return `${now.getFullYear()}-${month}-${day}`;
 }
 
 export const store = reactive({
@@ -25,8 +32,23 @@ export const store = reactive({
   revealed: null,
   honeyTotal: 0,
   honeyToday: 0,
+  level: null,
+  dyslexia: false,
   loadError: null,
 });
+
+export async function restoreSession() {
+  try {
+    const session = await startSession(store.deviceId, localDate());
+    store.honeyTotal = session.totalHoney;
+    store.honeyToday = session.honeyToday;
+    store.level = session.level;
+    store.dyslexia = session.dyslexia;
+    store.loadError = null;
+  } catch (error) {
+    store.loadError = error.message;
+  }
+}
 
 export async function loadQuestion() {
   stopSpeech();

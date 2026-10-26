@@ -81,6 +81,9 @@ function toggleReadAloud() {
         Hint
       </button>
       <p v-if="solved" class="message">Nice work.</p>
+      <p v-if="store.verdict?.capped" class="message">
+        Done for today. Come back tomorrow.
+      </p>
       <p v-else-if="revealed" class="message">
         Now you know how it works. Try the next one.
       </p>

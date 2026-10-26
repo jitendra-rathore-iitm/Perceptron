@@ -2,9 +2,10 @@
 import { onMounted } from "vue";
 import NavBar from "./components/NavBar.vue";
 import PracticeScreen from "./components/PracticeScreen.vue";
-import { loadQuestion, store } from "./store";
+import { loadQuestion, restoreSession, store } from "./store";
 
-onMounted(() => {
+onMounted(async () => {
+  await restoreSession();
   loadQuestion();
 });
 </script>
