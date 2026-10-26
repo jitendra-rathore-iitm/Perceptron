@@ -1,0 +1,20 @@
+# Local devpost learning context
+/devpost/learner-profile.md
+
+# Generated & local artifacts
+node_modules/
+dist/
+__pycache__/
+*.pyc
+backend/perceptron.db
+.venv/
+venv/
+.pytest_cache/
+
+# Secrets & local config
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.local
