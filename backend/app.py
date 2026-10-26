@@ -41,8 +41,9 @@ def check():
         return error("invalid_selection", "Pick one of the four answers before checking.", 400)
     device_id = device_id.strip()
     question_id = question_id.strip()
-    if questions.is_solved(device_id, question_id):
-        totals = questions.honey_by_device.get(device_id, {"total": 0, "today": 0})
+    status = questions.attempt_status(device_id, question_id)
+    if status == "solved":
+        totals = questions.totals_for(device_id)
         return jsonify(
             {
                 "correct": True,
@@ -52,7 +53,25 @@ def check():
                 "totalHoney": totals["total"],
             }
         )
+    if status == "revealed":
+        return jsonify(questions.reveal_payload(device_id, question_id))
     return jsonify(questions.grade(device_id, question_id, selected))
+
+
+@app.post("/api/hint")
+def hint():
+    body = request.get_json(silent=True)
+    if not isinstance(body, dict):
+        return error("bad_request", "Send JSON like {deviceId, questionId}.", 400)
+    device_id = (body.get("deviceId") or "").strip()
+    question_id = (body.get("questionId") or "").strip()
+    if not device_id:
+        return error("bad_request", "Missing deviceId.", 400)
+    try:
+        questions.option_count(question_id)
+    except KeyError:
+        return error("unknown_question", "That question does not exist.", 404)
+    return jsonify(questions.hint_step(device_id, question_id))
 
 
 if __name__ == "__main__":

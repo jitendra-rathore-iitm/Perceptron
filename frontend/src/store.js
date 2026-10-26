@@ -1,5 +1,5 @@
 import { reactive } from "vue";
-import { checkAnswer, getPracticeQuestion } from "./api";
+import { checkAnswer, getPracticeQuestion, revealHint } from "./api";
 import { setQuestionText, stopSpeech } from "./speech";
 
 const DEVICE_ID_KEY = "perceptron_device_id";
@@ -20,6 +20,9 @@ export const store = reactive({
   selected: null,
   verdict: null,
   submitting: false,
+  hintSteps: [],
+  hintPending: false,
+  revealed: null,
   honeyTotal: 0,
   honeyToday: 0,
   loadError: null,
@@ -29,6 +32,8 @@ export async function loadQuestion() {
   stopSpeech();
   store.selected = null;
   store.verdict = null;
+  store.hintSteps = [];
+  store.revealed = null;
   store.question = null;
   try {
     store.question = await getPracticeQuestion(store.deviceId);
@@ -52,6 +57,12 @@ export async function submitAnswer() {
       store.selected,
     );
     store.verdict = result;
+    if (result.hint) {
+      store.hintSteps.push(result.hint);
+    }
+    if (result.revealed) {
+      store.revealed = result;
+    }
     if (result.correct) {
       store.honeyTotal = result.totalHoney;
       store.honeyToday = result.honeyToday;
@@ -61,6 +72,23 @@ export async function submitAnswer() {
     store.verdict = null;
   } finally {
     store.submitting = false;
+  }
+}
+
+export async function requestHint() {
+  if (store.hintPending || store.hintSteps.length >= 3 || store.revealed) {
+    return;
+  }
+  store.hintPending = true;
+  try {
+    const result = await revealHint(store.deviceId, store.question.id);
+    if (result.hint) {
+      store.hintSteps.push(result.hint);
+    }
+  } catch (error) {
+    store.loadError = error.message;
+  } finally {
+    store.hintPending = false;
   }
 }
 

@@ -10,6 +10,10 @@ defineProps({
     type: String,
     required: true,
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
 });
 </script>
 
@@ -18,6 +22,7 @@ defineProps({
     type="button"
     class="answer"
     :class="{ selected: store.selected === index }"
+    :disabled="disabled"
     @click="store.selected = index"
   >
     {{ option }}

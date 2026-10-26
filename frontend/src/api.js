@@ -25,3 +25,10 @@ export function checkAnswer(deviceId, questionId, selected) {
     body: JSON.stringify({ deviceId, questionId, selected }),
   });
 }
+
+export function revealHint(deviceId, questionId) {
+  return request("/api/hint", {
+    method: "POST",
+    body: JSON.stringify({ deviceId, questionId }),
+  });
+}

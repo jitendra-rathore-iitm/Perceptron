@@ -190,6 +190,46 @@ body {
   margin: 16px 0;
 }
 
+.hints {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 16px;
+  text-align: left;
+}
+
+.hint {
+  background: var(--off-white);
+  border: 2px solid var(--black);
+  border-radius: 12px;
+  padding: 10px 14px;
+}
+
+.hint p {
+  margin: 0;
+}
+
+.hint.steps {
+  background: var(--sky);
+}
+
+.hint.worked {
+  background: var(--yellow);
+}
+
+.hint.reveal {
+  background: var(--off-white);
+  border-width: 3px;
+}
+
+.hint-note {
+  margin-top: 6px;
+  font-size: 16px;
+}
+
+.hint-btn {
+  margin-left: 8px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation: none !important;

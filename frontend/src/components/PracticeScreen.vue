@@ -1,7 +1,14 @@
 <script setup>
 import { computed } from "vue";
 import AnswerCard from "./AnswerCard.vue";
-import { loadQuestion, nextQuestion, store, submitAnswer } from "../store";
+import HintStack from "./HintStack.vue";
+import {
+  loadQuestion,
+  nextQuestion,
+  requestHint,
+  store,
+  submitAnswer,
+} from "../store";
 import { speakQuestion, speech, stopSpeech } from "../speech";
 
 const cardClass = computed(() => {
@@ -10,6 +17,8 @@ const cardClass = computed(() => {
 });
 const hasAnswer = computed(() => store.selected !== null);
 const solved = computed(() => store.verdict?.correct === true);
+const revealed = computed(() => store.verdict?.revealed === true);
+const done = computed(() => solved.value || revealed.value);
 
 function toggleReadAloud() {
   if (speech.speaking) {
@@ -51,19 +60,32 @@ function toggleReadAloud() {
           :key="index"
           :index="index"
           :option="option"
+          :disabled="done"
         />
       </div>
+      <HintStack />
       <button
         class="btn"
         type="button"
-        :disabled="!hasAnswer || store.submitting || solved"
+        :disabled="!hasAnswer || store.submitting || done"
         @click="submitAnswer"
       >
         Check answer
       </button>
-      <p v-if="store.verdict?.correct" class="message">Nice work.</p>
+      <button
+        class="btn hint-btn"
+        type="button"
+        :disabled="store.hintSteps.length >= 3 || done || store.hintPending"
+        @click="requestHint"
+      >
+        Hint
+      </button>
+      <p v-if="solved" class="message">Nice work.</p>
+      <p v-else-if="revealed" class="message">
+        Now you know how it works. Try the next one.
+      </p>
       <p v-else-if="store.verdict" class="message">Not quite. Try again.</p>
-      <button v-if="solved" class="btn" type="button" @click="nextQuestion">
+      <button v-if="done" class="btn" type="button" @click="nextQuestion">
         Next
       </button>
     </template>
