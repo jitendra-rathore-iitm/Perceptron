@@ -114,8 +114,10 @@ def set_dyslexia(device_id, value):
 
 def reset_device(device_id):
     with connect() as conn:
-        for table in ("students", "placement_answers", "seen_questions", "attempts"):
-            conn.execute(f"DELETE FROM {table} WHERE device_id = ?", (device_id,))
+        conn.execute("DELETE FROM students WHERE device_id = ?", (device_id,))
+        conn.execute("DELETE FROM placement_answers WHERE device_id = ?", (device_id,))
+        conn.execute("DELETE FROM seen_questions WHERE device_id = ?", (device_id,))
+        conn.execute("DELETE FROM attempts WHERE device_id = ?", (device_id,))
 
 
 def get_attempt(device_id, question_id):
