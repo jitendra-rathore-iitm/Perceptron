@@ -49,6 +49,16 @@ def session():
         student = existing
         if today_valid:
             student = state.apply_daily_reset(student, claimed)
+    rows = state.placement_rows(device_id)
+    finished = student["level"] is not None
+    placement = [] if finished else [
+        {
+            "questionId": row["question_id"],
+            "order": row["order_index"],
+            "outcome": row["outcome"],
+        }
+        for row in rows
+    ]
     return jsonify(
         {
             "isNew": is_new,
@@ -56,9 +66,64 @@ def session():
             "honeyToday": student["honey_today"],
             "level": student["level"],
             "dyslexia": bool(student["dyslexia"]),
-            "placement": [],
+            "placement": placement,
         }
     )
+
+
+@app.get("/api/placement/questions")
+def placement_questions():
+    device_id = request.args.get("deviceId", "").strip()
+    found, err = require_student(device_id)
+    if err:
+        return err
+    return jsonify({"questions": questions.placement_list()})
+
+
+@app.post("/api/placement/answer")
+def placement_answer():
+    body = request.get_json(silent=True)
+    if not isinstance(body, dict):
+        return error("bad_request", "Send JSON like {deviceId, questionId, selected}.", 400)
+    found, err = require_student(body.get("deviceId"))
+    if err:
+        return err
+    device_id = found[0]
+    question_id = body.get("questionId", "")
+    selected = body.get("selected")
+    if not isinstance(question_id, str) or not question_id.strip():
+        return error("bad_request", "Missing questionId.", 400)
+    question_id = question_id.strip()
+    if question_id not in questions.placement_by_id:
+        return error("unknown_question", "That placement question does not exist.", 404)
+    if selected is not None:
+        count = len(questions.placement_by_id[question_id]["options"])
+        ok = isinstance(selected, int) and not isinstance(selected, bool) and 0 <= selected < count
+        if not ok:
+            return error("invalid_selection", "Pick one of the four answers or skip.", 400)
+    rows = state.placement_rows(device_id)
+    already = {row["question_id"] for row in rows}
+    if question_id not in already:
+        outcome = questions.placement_outcome(question_id, selected)
+        state.save_placement_answer(device_id, question_id, questions.placement_by_id[question_id]["order"], outcome)
+        rows = state.placement_rows(device_id)
+    if len(rows) < 6:
+        return jsonify({"done": False})
+    placed = questions.placed_level(rows)
+    state.set_level(device_id, placed)
+    return jsonify({"done": True, "placedLevel": placed})
+
+
+@app.post("/api/reset")
+def reset():
+    body = request.get_json(silent=True)
+    if not isinstance(body, dict):
+        return error("bad_request", "Send JSON like {deviceId}.", 400)
+    device_id = body.get("deviceId", "")
+    if not isinstance(device_id, str) or not device_id.strip():
+        return error("bad_request", "Missing deviceId.", 400)
+    state.reset_device(device_id.strip())
+    return jsonify({"isNew": True})
 
 
 @app.get("/api/practice/question")

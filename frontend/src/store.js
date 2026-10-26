@@ -1,5 +1,13 @@
 import { reactive } from "vue";
-import { checkAnswer, getPracticeQuestion, revealHint, startSession } from "./api";
+import {
+  checkAnswer,
+  getPlacementQuestions,
+  getPracticeQuestion,
+  resetProgress,
+  revealHint,
+  startSession,
+  submitPlacementAnswer,
+} from "./api";
 import { setQuestionText, stopSpeech } from "./speech";
 
 const DEVICE_ID_KEY = "perceptron_device_id";
@@ -22,7 +30,8 @@ function localDate() {
 
 export const store = reactive({
   deviceId: loadDeviceId(),
-  screen: "practice",
+  screen: "welcome",
+  isNew: true,
   question: null,
   selected: null,
   verdict: null,
@@ -34,16 +43,95 @@ export const store = reactive({
   honeyToday: 0,
   level: null,
   dyslexia: false,
+  placementQuestions: [],
+  placementRows: [],
+  placementIndex: 0,
+  placementBusy: false,
+  placementResult: null,
   loadError: null,
 });
 
 export async function restoreSession() {
   try {
     const session = await startSession(store.deviceId, localDate());
+    store.isNew = session.isNew;
     store.honeyTotal = session.totalHoney;
     store.honeyToday = session.honeyToday;
     store.level = session.level;
     store.dyslexia = session.dyslexia;
+    store.placementRows = session.placement;
+    store.screen = "welcome";
+    store.loadError = null;
+  } catch (error) {
+    store.loadError = error.message;
+  }
+}
+
+export async function enterPractice() {
+  store.screen = "practice";
+  store.placementResult = null;
+  loadQuestion();
+}
+
+export async function startPlacement() {
+  stopSpeech();
+  try {
+    const result = await getPlacementQuestions(store.deviceId);
+    store.placementQuestions = result.questions;
+    store.placementIndex = Math.min(
+      (store.placementRows ?? []).length,
+      result.questions.length,
+    );
+    store.selected = null;
+    store.placementResult = null;
+    store.screen = "placement";
+    store.loadError = null;
+  } catch (error) {
+    store.loadError = error.message;
+  }
+}
+
+export async function submitPlacement(selected) {
+  if (store.placementBusy) return;
+  const question = store.placementQuestions[store.placementIndex];
+  if (!question) return;
+  store.placementBusy = true;
+  try {
+    const result = await submitPlacementAnswer(
+      store.deviceId,
+      question.id,
+      selected,
+    );
+    if (result.done) {
+      store.level = result.placedLevel;
+      store.placementResult = result.placedLevel;
+      store.placementRows = [];
+    } else {
+      store.placementIndex += 1;
+      store.selected = null;
+    }
+    store.loadError = null;
+  } catch (error) {
+    store.loadError = error.message;
+  } finally {
+    store.placementBusy = false;
+  }
+}
+
+export async function startOver() {
+  try {
+    await resetProgress(store.deviceId);
+    store.honeyTotal = 0;
+    store.honeyToday = 0;
+    store.level = null;
+    store.isNew = true;
+    store.placementRows = [];
+    store.placementQuestions = [];
+    store.selected = null;
+    store.verdict = null;
+    store.hintSteps = [];
+    store.revealed = null;
+    store.screen = "welcome";
     store.loadError = null;
   } catch (error) {
     store.loadError = error.message;

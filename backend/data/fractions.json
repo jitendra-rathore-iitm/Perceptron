@@ -1,5 +1,120 @@
 {
-  "placement": [],
+  "placement": [
+    {
+      "id": "p1",
+      "level": 1,
+      "order": 1,
+      "text": "In the fraction 2/5, what does the 5 tell you?",
+      "options": [
+        "The whole was split into 5 equal parts",
+        "5 parts are shaded",
+        "The answer is 5",
+        "You count 5 of the shaded parts"
+      ],
+      "correct": 0,
+      "hints": [
+        "Look at the bottom number of the fraction.",
+        "The bottom number counts the equal parts the whole was split into.",
+        "In 3/8 the 8 means 8 equal parts, so in 2/5 the 5 means 5 equal parts."
+      ],
+      "explanation": "The bottom number (denominator) counts the equal parts the whole was split into."
+    },
+    {
+      "id": "p2",
+      "level": 1,
+      "order": 2,
+      "text": "Which fraction is larger: 3/8 or 3/4?",
+      "options": [
+        "3/4",
+        "3/8",
+        "They are the same size",
+        "You cannot compare them"
+      ],
+      "correct": 0,
+      "hints": [
+        "Both fractions have 3 pieces. Which whole has bigger pieces?",
+        "More parts means smaller pieces: eighths are smaller than quarters.",
+        "3 quarters of a pizza is more than 3 thin slices out of 8, so 3/4 is larger."
+      ],
+      "explanation": "With the same top number, fewer parts in the whole means bigger pieces, so 3/4 is larger."
+    },
+    {
+      "id": "p3",
+      "level": 2,
+      "order": 3,
+      "text": "Which fraction is equivalent to 1/2?",
+      "options": [
+        "2/4",
+        "1/4",
+        "2/3",
+        "1/3"
+      ],
+      "correct": 0,
+      "hints": [
+        "Equivalent fractions name the same amount with different numbers.",
+        "Try doubling both numbers of 1/2 and see what you get.",
+        "1/2 = 2/4: double the top and the bottom and the amount stays the same."
+      ],
+      "explanation": "Doubling the top and bottom of 1/2 gives 2/4, the same amount."
+    },
+    {
+      "id": "p4",
+      "level": 2,
+      "order": 4,
+      "text": "1/5 + 2/5 = ?",
+      "options": [
+        "3/5",
+        "3/10",
+        "2/5",
+        "1/10"
+      ],
+      "correct": 0,
+      "hints": [
+        "Both fractions are counted in fifths, so the pieces match.",
+        "Add the top numbers and keep the bottom number the same.",
+        "1 fifth plus 2 fifths is 3 fifths, so the answer is 3/5."
+      ],
+      "explanation": "Same denominator: add the top numbers, keep the bottom. 1/5 + 2/5 = 3/5."
+    },
+    {
+      "id": "p5",
+      "level": 3,
+      "order": 5,
+      "text": "1/2 + 1/4 = ?",
+      "options": [
+        "3/4",
+        "2/6",
+        "1/6",
+        "2/4"
+      ],
+      "correct": 0,
+      "hints": [
+        "Halves and quarters are different sizes, so make them match first.",
+        "1/2 is the same as 2/4. Now both are quarters.",
+        "2/4 + 1/4 = 3/4."
+      ],
+      "explanation": "Rename 1/2 as 2/4, then add: 2/4 + 1/4 = 3/4."
+    },
+    {
+      "id": "p6",
+      "level": 3,
+      "order": 6,
+      "text": "1/3 × 1/2 = ?",
+      "options": [
+        "1/6",
+        "2/3",
+        "1/5",
+        "2/6"
+      ],
+      "correct": 0,
+      "hints": [
+        "Multiplying fractions uses the tops together and the bottoms together.",
+        "Multiply the top numbers, then multiply the bottom numbers.",
+        "1 × 1 = 1 and 3 × 2 = 6, so the answer is 1/6."
+      ],
+      "explanation": "Multiply tops and bottoms: 1/3 × 1/2 = 1/6."
+    }
+  ],
   "levels": {
     "1": [
       {
@@ -24,7 +139,12 @@
         "id": "l1-02",
         "level": 1,
         "text": "A pizza is cut into 6 equal slices. You eat 1 slice. What fraction of the pizza did you eat?",
-        "options": ["6/1", "1/5", "1/6", "5/6"],
+        "options": [
+          "6/1",
+          "1/5",
+          "1/6",
+          "5/6"
+        ],
         "correct": 2,
         "hints": [
           "How many slices were there in total, and how many did you take?",
@@ -37,7 +157,12 @@
         "id": "l1-03",
         "level": 1,
         "text": "How many quarters are in one whole?",
-        "options": ["3", "2", "8", "4"],
+        "options": [
+          "3",
+          "2",
+          "8",
+          "4"
+        ],
         "correct": 3,
         "hints": [
           "One quarter is 1/4. How many of those fit into 1?",
@@ -68,7 +193,12 @@
         "id": "l1-05",
         "level": 1,
         "text": "Which is bigger: 1/3 or 1/5?",
-        "options": ["1/5", "1/3", "They are equal", "You cannot compare them"],
+        "options": [
+          "1/5",
+          "1/3",
+          "They are equal",
+          "You cannot compare them"
+        ],
         "correct": 1,
         "hints": [
           "Picture two same-size bars. Split one into 3 equal parts and one into 5. Which single part is wider?",
@@ -81,7 +211,12 @@
         "id": "l1-06",
         "level": 1,
         "text": "Which is smaller: 2/9 or 2/7?",
-        "options": ["2/9", "2/7", "They are equal", "You cannot compare them"],
+        "options": [
+          "2/9",
+          "2/7",
+          "They are equal",
+          "You cannot compare them"
+        ],
         "correct": 0,
         "hints": [
           "Both fractions take the same number of parts. Which whole is split into more parts?",
@@ -94,7 +229,12 @@
         "id": "l1-07",
         "level": 1,
         "text": "One hour has 60 minutes. What fraction of an hour is 15 minutes?",
-        "options": ["60/15", "15/45", "15/60", "45/60"],
+        "options": [
+          "60/15",
+          "15/45",
+          "15/60",
+          "45/60"
+        ],
         "correct": 2,
         "hints": [
           "Which number is the part, and which is the whole?",
@@ -107,7 +247,12 @@
         "id": "l1-08",
         "level": 1,
         "text": "There are 10 pets and 7 of them are cats. What fraction of the pets are cats?",
-        "options": ["3/7", "7/10", "10/7", "7/3"],
+        "options": [
+          "3/7",
+          "7/10",
+          "10/7",
+          "7/3"
+        ],
         "correct": 1,
         "hints": [
           "Which of the two numbers is the part, and which is the whole?",
@@ -120,7 +265,12 @@
         "id": "l1-09",
         "level": 1,
         "text": "A chocolate bar has 8 equal pieces. Ria eats 3 pieces. What fraction of the bar is left?",
-        "options": ["3/8", "5/8", "8/5", "1/5"],
+        "options": [
+          "3/8",
+          "5/8",
+          "8/5",
+          "1/5"
+        ],
         "correct": 1,
         "hints": [
           "How many pieces were eaten, and how many were there to start with?",
@@ -133,7 +283,12 @@
         "id": "l1-10",
         "level": 1,
         "text": "One day has 24 hours. What fraction of a day is 1 hour?",
-        "options": ["1/24", "1/12", "1/60", "24/1"],
+        "options": [
+          "1/24",
+          "1/12",
+          "1/60",
+          "24/1"
+        ],
         "correct": 0,
         "hints": [
           "Which number is the part, and which is the whole?",
@@ -164,7 +319,12 @@
         "id": "l1-12",
         "level": 1,
         "text": "Which is bigger: 3/4 or 3/8?",
-        "options": ["3/8", "3/4", "They are equal", "You cannot compare them"],
+        "options": [
+          "3/8",
+          "3/4",
+          "They are equal",
+          "You cannot compare them"
+        ],
         "correct": 1,
         "hints": [
           "Both fractions count three parts. Which whole is split into fewer parts?",
@@ -179,7 +339,12 @@
         "id": "l2-01",
         "level": 2,
         "text": "Which fraction is equal to 1/2?",
-        "options": ["1/4", "3/4", "2/4", "4/2"],
+        "options": [
+          "1/4",
+          "3/4",
+          "2/4",
+          "4/2"
+        ],
         "correct": 2,
         "hints": [
           "Doubling the bottom number, what must you do to the top to keep the fraction fair?",
@@ -192,7 +357,12 @@
         "id": "l2-02",
         "level": 2,
         "text": "What is 1/3 + 1/3?",
-        "options": ["1/6", "2/3", "2/6", "3/2"],
+        "options": [
+          "1/6",
+          "2/3",
+          "2/6",
+          "3/2"
+        ],
         "correct": 1,
         "hints": [
           "Adding thirds is like adding apples counted in thirds.",
@@ -205,7 +375,12 @@
         "id": "l2-03",
         "level": 2,
         "text": "What is 3/8 - 1/8?",
-        "options": ["2/8", "2/0", "4/8", "3/8"],
+        "options": [
+          "2/8",
+          "2/0",
+          "4/8",
+          "3/8"
+        ],
         "correct": 0,
         "hints": [
           "Take away one eighth from three eighths.",
@@ -218,7 +393,12 @@
         "id": "l2-04",
         "level": 2,
         "text": "Which fraction is equal to 2/6?",
-        "options": ["2/3", "4/6", "6/2", "1/3"],
+        "options": [
+          "2/3",
+          "4/6",
+          "6/2",
+          "1/3"
+        ],
         "correct": 3,
         "hints": [
           "What single number divides both the top and the bottom of 2/6?",
@@ -231,7 +411,12 @@
         "id": "l2-05",
         "level": 2,
         "text": "What is 5/10 + 5/10?",
-        "options": ["10/10", "5/20", "11/10", "1/2"],
+        "options": [
+          "10/10",
+          "5/20",
+          "11/10",
+          "1/2"
+        ],
         "correct": 0,
         "hints": [
           "You are adding two equal groups of tenths.",
@@ -244,7 +429,12 @@
         "id": "l2-06",
         "level": 2,
         "text": "What is 7/9 - 4/9?",
-        "options": ["3/18", "4/9", "11/18", "3/9"],
+        "options": [
+          "3/18",
+          "4/9",
+          "11/18",
+          "3/9"
+        ],
         "correct": 3,
         "hints": [
           "Subtract four ninths from seven ninths.",
@@ -257,7 +447,12 @@
         "id": "l2-07",
         "level": 2,
         "text": "Which fraction is the same as 3/5?",
-        "options": ["9/10", "3/10", "6/10", "8/15"],
+        "options": [
+          "9/10",
+          "3/10",
+          "6/10",
+          "8/15"
+        ],
         "correct": 2,
         "hints": [
           "Times the bottom by 2 to make tenths. What happens to the top?",
@@ -270,7 +465,12 @@
         "id": "l2-08",
         "level": 2,
         "text": "Which fraction is equal to 4/6?",
-        "options": ["4/12", "6/4", "8/6", "8/12"],
+        "options": [
+          "4/12",
+          "6/4",
+          "8/6",
+          "8/12"
+        ],
         "correct": 3,
         "hints": [
           "Times both numbers of 4/6 by the same number.",
@@ -285,7 +485,12 @@
         "id": "l3-01",
         "level": 3,
         "text": "What is 1/2 + 1/4?",
-        "options": ["2/6", "1/4", "1/8", "3/4"],
+        "options": [
+          "2/6",
+          "1/4",
+          "1/8",
+          "3/4"
+        ],
         "correct": 3,
         "hints": [
           "The bottoms are different. Can you make them match?",
@@ -298,7 +503,12 @@
         "id": "l3-02",
         "level": 3,
         "text": "What is 1/3 + 1/6?",
-        "options": ["2/3", "2/9", "3/6", "1/9"],
+        "options": [
+          "2/3",
+          "2/9",
+          "3/6",
+          "1/9"
+        ],
         "correct": 2,
         "hints": [
           "Sixths are made by cutting thirds in half again.",
@@ -311,7 +521,12 @@
         "id": "l3-03",
         "level": 3,
         "text": "What is 3/4 - 1/2?",
-        "options": ["1/4", "1/2", "1/8", "4/2"],
+        "options": [
+          "1/4",
+          "1/2",
+          "1/8",
+          "4/2"
+        ],
         "correct": 0,
         "hints": [
           "Write 1/2 so it counts fourths, like 3/4 does.",
@@ -324,7 +539,12 @@
         "id": "l3-04",
         "level": 3,
         "text": "What is 2/3 - 1/6?",
-        "options": ["1/6", "5/6", "1/2", "2/18"],
+        "options": [
+          "1/6",
+          "5/6",
+          "1/2",
+          "2/18"
+        ],
         "correct": 2,
         "hints": [
           "Count everything in sixths.",
@@ -337,7 +557,12 @@
         "id": "l3-05",
         "level": 3,
         "text": "What is 1/2 x 3/4?",
-        "options": ["3/6", "3/8", "2/6", "4/6"],
+        "options": [
+          "3/6",
+          "3/8",
+          "2/6",
+          "4/6"
+        ],
         "correct": 1,
         "hints": [
           "Multiplying halves by quarters multiplies the numbers on top, and the numbers underneath.",
@@ -350,7 +575,12 @@
         "id": "l3-06",
         "level": 3,
         "text": "What is 2/3 x 2/5?",
-        "options": ["4/8", "4/10", "4/15", "9/15"],
+        "options": [
+          "4/8",
+          "4/10",
+          "4/15",
+          "9/15"
+        ],
         "correct": 2,
         "hints": [
           "Multiplying fractions does not need matching bottoms.",
@@ -363,7 +593,12 @@
         "id": "l3-07",
         "level": 3,
         "text": "What is 3/5 - 1/10?",
-        "options": ["2/5", "1/2", "3/10", "1/10"],
+        "options": [
+          "2/5",
+          "1/2",
+          "3/10",
+          "1/10"
+        ],
         "correct": 1,
         "hints": [
           "Write both fractions as tenths.",
@@ -376,7 +611,12 @@
         "id": "l3-08",
         "level": 3,
         "text": "What is 1/2 + 1/3?",
-        "options": ["2/5", "1/6", "3/2", "5/6"],
+        "options": [
+          "2/5",
+          "1/6",
+          "3/2",
+          "5/6"
+        ],
         "correct": 3,
         "hints": [
           "Sixths can be shared by both: 1/2 and 1/3 both turn into sixths.",

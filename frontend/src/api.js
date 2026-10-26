@@ -56,3 +56,23 @@ export function revealHint(deviceId, questionId) {
     body: JSON.stringify({ deviceId, questionId }),
   });
 }
+
+export function getPlacementQuestions(deviceId) {
+  return request(
+    `/api/placement/questions?deviceId=${encodeURIComponent(deviceId)}`,
+  );
+}
+
+export function submitPlacementAnswer(deviceId, questionId, selected) {
+  return request("/api/placement/answer", {
+    method: "POST",
+    body: JSON.stringify({ deviceId, questionId, selected }),
+  });
+}
+
+export function resetProgress(deviceId) {
+  return request("/api/reset", {
+    method: "POST",
+    body: JSON.stringify({ deviceId }),
+  });
+}

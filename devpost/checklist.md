@@ -49,7 +49,7 @@ Build mode: learn (learner asked for step-by-step building with verification and
   Learner check: Answer a question, refresh the page, and see your honey still there; then (in demo mode, if started so) hit the cap and read "Done for today."
   Commit: `Slice 4: persistent state, capped honey, validated dates, error envelope`
 
-- [ ] **5. The placement check**
+- [x] **5. The placement check**
   Becomes usable: New devices run six skippable questions (2/2/2, fixed order), progress label reads "Question n of 6," the result is the highest level with ≥1 correct, skips are never wrong, refresh mid-placement resumes exactly, and Start over clears everything.
   Why now: Levels gate every remaining behavior; placement is the adaptive spine of the demo's first minute. Builds directly on the `placement_answers` table created in Slice 4 — no new data model.
   PRD ref: `prd.md > Placement Check`, `prd.md > The Core Journey` (steps 2-3, 7)

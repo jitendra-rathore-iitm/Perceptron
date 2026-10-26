@@ -12,8 +12,40 @@ with open(BANK_PATH, encoding="utf-8") as f:
 
 practice_by_level = {int(k): v for k, v in bank["levels"].items()}
 all_practice = {q["id"]: q for level in practice_by_level.values() for q in level if q}
+placement_by_id = {q["id"]: q for q in bank["placement"]}
 
 HINT_KINDS = ["nudge", "steps", "worked"]
+
+
+def placement_list():
+    ordered = sorted(bank["placement"], key=lambda q: q["order"])
+    return [
+        {
+            "id": q["id"],
+            "level": q["level"],
+            "text": q["text"],
+            "options": q["options"],
+            "order": q["order"],
+        }
+        for q in ordered
+    ]
+
+
+def placement_outcome(question_id, selected):
+    if selected is None:
+        return "skipped"
+    return "correct" if selected == placement_by_id[question_id]["correct"] else "wrong"
+
+
+def placed_level(rows):
+    wins = set()
+    for row in rows:
+        if row["outcome"] == "correct":
+            wins.add(placement_by_id[row["question_id"]]["level"])
+    for level in (3, 2, 1):
+        if level in wins:
+            return level
+    return 1
 
 
 def attempt_status(device_id, question_id):

@@ -267,6 +267,48 @@ body::before {
   margin: 16px 0;
 }
 
+.progress {
+  font-weight: bold;
+  background: var(--off-white);
+  border: 2px solid var(--black);
+  border-radius: 10px;
+  display: inline-block;
+  padding: 4px 12px;
+  margin: 0 0 16px;
+}
+
+.welcome-title {
+  font-size: 34px;
+  margin: 0 0 8px;
+}
+
+.welcome-line {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 6px 0;
+}
+
+.device-note {
+  font-size: 16px;
+  background: var(--off-white);
+  border: 2px solid var(--black);
+  border-radius: 10px;
+  padding: 10px 14px;
+  max-width: 40ch;
+  margin: 16px auto;
+}
+
+.welcome-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.start-btn {
+  margin-right: 8px;
+}
+
 .hints {
   display: grid;
   gap: 10px;
