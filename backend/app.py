@@ -1,5 +1,7 @@
 from flask import Flask, jsonify, request
 
+import os
+
 import questions
 
 app = Flask(__name__)
@@ -74,5 +76,13 @@ def hint():
     return jsonify(questions.hint_step(device_id, question_id))
 
 
+
+
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5000, debug=True)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(
+        host="0.0.0.0",
+        port=port,
+        debug=False
+    )
+
