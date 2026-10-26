@@ -1,19 +1,28 @@
-/frontend/node_modules
-/backend/venv
-
-
-# Local devpost learning context
-/devpost/learner-profile.md
-
-# Generated & local artifacts
+# Frontend / Node
 node_modules/
-dist/
+frontend/dist/
+.vite/
+
+# Python
 __pycache__/
 *.pyc
-backend/perceptron.db
+*.pyo
 .venv/
 venv/
+backend/venv/
 .pytest_cache/
+
+# Local database (SQLite + sidecar files)
+backend/perceptron.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Logs
+*.log
+
+# Local devpost learning context (private)
+/devpost/learner-profile.md
 
 # Secrets & local config
 .env
@@ -22,3 +31,10 @@ venv/
 *.key
 *.pem
 *.local
+.vercel
+
+# OS & editor junk
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
