@@ -2,6 +2,7 @@
 import { computed } from "vue";
 import AnswerCard from "./AnswerCard.vue";
 import { loadQuestion, nextQuestion, store, submitAnswer } from "../store";
+import { speakQuestion, speech, stopSpeech } from "../speech";
 
 const cardClass = computed(() => {
   if (!store.verdict || typeof store.verdict !== "object") return "";
@@ -9,6 +10,14 @@ const cardClass = computed(() => {
 });
 const hasAnswer = computed(() => store.selected !== null);
 const solved = computed(() => store.verdict?.correct === true);
+
+function toggleReadAloud() {
+  if (speech.speaking) {
+    stopSpeech();
+    return;
+  }
+  speakQuestion(store.question.text);
+}
 </script>
 
 <template>
@@ -19,7 +28,23 @@ const solved = computed(() => store.verdict?.correct === true);
     </div>
     <p v-else-if="!store.question" class="message">Loading&hellip;</p>
     <template v-else>
-      <h2 class="question">{{ store.question.text }}</h2>
+      <div class="question-row">
+        <h2 class="question">
+          <span
+            v-for="(word, i) in speech.words"
+            :key="i"
+            :class="['word', { lit: speech.highlightIndex === i }]"
+            >{{ word.text }}{{ word.trail }}</span
+          >
+        </h2>
+        <button class="btn read-btn" type="button" @click="toggleReadAloud">
+          {{ speech.speaking ? "Stop" : "Read aloud" }}
+        </button>
+      </div>
+      <p v-if="speech.unavailable" class="speech-note">
+        Read-aloud is not available in this browser. You can still answer the
+        question.
+      </p>
       <div class="answers">
         <AnswerCard
           v-for="(option, index) in store.question.options"

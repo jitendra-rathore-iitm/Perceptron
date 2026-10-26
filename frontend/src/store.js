@@ -1,5 +1,6 @@
 import { reactive } from "vue";
 import { checkAnswer, getPracticeQuestion } from "./api";
+import { setQuestionText, stopSpeech } from "./speech";
 
 const DEVICE_ID_KEY = "perceptron_device_id";
 
@@ -25,12 +26,14 @@ export const store = reactive({
 });
 
 export async function loadQuestion() {
+  stopSpeech();
   store.selected = null;
   store.verdict = null;
   store.question = null;
   try {
     store.question = await getPracticeQuestion(store.deviceId);
     store.loadError = null;
+    setQuestionText(store.question.text);
   } catch (error) {
     store.loadError = error.message;
   }
@@ -40,6 +43,7 @@ export async function submitAnswer() {
   if (store.selected === null || store.submitting) {
     return;
   }
+  stopSpeech();
   store.submitting = true;
   try {
     const result = await checkAnswer(
