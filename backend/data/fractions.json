@@ -1,0 +1,123 @@
+{
+  "placement": [],
+  "levels": {
+    "1": [
+      {
+        "id": "l1-01",
+        "level": 1,
+        "text": "In the fraction 3/4, what does the bottom number mean?",
+        "options": [
+          "How many equal parts the whole was split into",
+          "How many parts were shaded",
+          "The number we multiply by",
+          "The answer to the division"
+        ],
+        "correct": 0,
+        "hints": [
+          "Look at the two numbers in 3/4 and think about what each one counts.",
+          "The top number counts the parts being talked about. What does the bottom one count?",
+          "In 5/8 there are 8 parts in total, so the 8 is the bottom number. The bottom number always counts the equal parts the whole was split into."
+        ],
+        "explanation": "The bottom number counts the equal parts the whole was divided into."
+      },
+      {
+        "id": "l1-02",
+        "level": 1,
+        "text": "A pizza is cut into 6 equal slices. You eat 1 slice. What fraction of the pizza did you eat?",
+        "options": ["6/1", "1/5", "1/6", "5/6"],
+        "correct": 2,
+        "hints": [
+          "How many slices were there in total, and how many did you take?",
+          "The fraction is the slices you ate over the total slices: 1 over 6.",
+          "If the pizza were in 4 equal slices and you ate 1, that would be 1/4 — one part out of four. Same idea here with 6 parts."
+        ],
+        "explanation": "You ate 1 of the 6 equal slices, so the fraction is 1/6."
+      },
+      {
+        "id": "l1-03",
+        "level": 1,
+        "text": "How many quarters are in one whole?",
+        "options": ["3", "2", "8", "4"],
+        "correct": 3,
+        "hints": [
+          "One quarter is 1/4. How many of those fit into 1?",
+          "One whole is 4/4, so count the quarters.",
+          "Picture a square split into 4 equal parts. Fill in one part at a time — the square is full on the 4th part."
+        ],
+        "explanation": "Four quarters, 4/4, make one whole."
+      },
+      {
+        "id": "l1-04",
+        "level": 1,
+        "text": "There are 10 coins and 4 of them are gold. What fraction of the coins are gold?",
+        "options": [
+          "4/10",
+          "10/4",
+          "6/10",
+          "1/10"
+        ],
+        "correct": 0,
+        "hints": [
+          "What was the whole amount, and how much of it are we talking about?",
+          "The fraction is the number we care about over the whole.",
+          "If 2 of 5 sweets are red, the fraction of red sweets is 2/5 — part first, whole second. Here: 4 gold out of 10 coins."
+        ],
+        "explanation": "4 out of the 10 coins are gold, so the fraction is 4/10."
+      },
+      {
+        "id": "l1-05",
+        "level": 1,
+        "text": "Which is bigger: 1/3 or 1/5?",
+        "options": ["1/5", "1/3", "They are equal", "You cannot compare them"],
+        "correct": 1,
+        "hints": [
+          "Picture two same-size bars. Split one into 3 equal parts and one into 5. Which single part is wider?",
+          "The more parts you split a whole into, the smaller each part is.",
+          "1/2 is bigger than 1/10, because splitting in two makes bigger pieces than splitting in ten. The same idea works for 3 and 5."
+        ],
+        "explanation": "Splitting a whole into fewer parts makes each part bigger, so 1/3 is bigger than 1/5."
+      },
+      {
+        "id": "l1-06",
+        "level": 1,
+        "text": "Which is smaller: 2/9 or 2/7?",
+        "options": ["2/9", "2/7", "They are equal", "You cannot compare them"],
+        "correct": 0,
+        "hints": [
+          "Both fractions take the same number of parts. Which whole is split into more parts?",
+          "Comparing 2 of 9 parts with 2 of 7 parts: ninths are smaller pieces because there are more of them.",
+          "Between 1/6 and 1/8, the sixths are bigger. When the top numbers are equal, the bigger bottom number gives the smaller piece."
+        ],
+        "explanation": "Ninths are smaller pieces than sevenths, so 2/9 is smaller than 2/7."
+      },
+      {
+        "id": "l1-07",
+        "level": 1,
+        "text": "One hour has 60 minutes. What fraction of an hour is 15 minutes?",
+        "options": ["60/15", "15/45", "15/60", "45/60"],
+        "correct": 2,
+        "hints": [
+          "Which number is the part, and which is the whole?",
+          "Minutes you are talking about over the minutes in the whole hour.",
+          "30 minutes of an hour is written 30/60 — thirty parts out of sixty — because 30 is the part and 60 is the whole."
+        ],
+        "explanation": "15 minutes out of the 60 in an hour, so the fraction is 15/60."
+      },
+      {
+        "id": "l1-08",
+        "level": 1,
+        "text": "There are 10 pets and 7 of them are cats. What fraction of the pets are cats?",
+        "options": ["3/7", "7/10", "10/7", "7/3"],
+        "correct": 1,
+        "hints": [
+          "Which of the two numbers is the part, and which is the whole?",
+          "Cats over all pets.",
+          "With 3 grey pets out of 8, the fraction of grey pets is 3/8 — the part on top, the whole underneath."
+        ],
+        "explanation": "7 of the 10 pets are cats, so the fraction is 7/10."
+      }
+    ],
+    "2": [],
+    "3": []
+  }
+}
