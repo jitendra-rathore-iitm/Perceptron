@@ -92,10 +92,10 @@ All read-aloud logic, isolated from components. PRD ref: `prd.md > Read Aloud`.
 
 Implements `prd.md > Read Aloud` and `prd.md > Hints` fallback wording.
 
-1. **Primary — boundary events:** split question text into words with their character offsets; speak the whole sentence in one `SpeechSynthesisUtterance`; `onboundary` gives each word's `charIndex` → highlight the word containing it.
-2. **Pre-flight check (early in build):** verify `onboundary` actually fires with `charIndex` in the target browser (Chrome desktop). Recorded evidence: a highlighted word while speech runs.
-3. **Fallback — sequential utterances:** if boundary events are missing/unreliable, speak word-by-word: highlight word *i*, speak it, on utterance end advance to *i+1*. Deterministic sync everywhere, slightly robotic pacing.
-4. **Rules:** question text only; highlight clears on utterance end; replay = tap again; tap during speech stops it; speech stops automatically on Check/Next; if `speechSynthesis` is unavailable or fails to start — friendly message, question fully usable, nothing else blocked.
+1. **Primary — deterministic per-word speech (revised at the Slice-3 checkpoint):** each word is spoken as its own short utterance; the word's highlight is set *synchronously before* it is spoken and cleared on utterance end. This works identically in every browser with no event-format assumptions. Tradeoff (accepted in the original decision): slightly robotic pacing between words.
+2. **Why the flip:** the spec's own pre-flight rule said verify `onboundary` in the recording browser first and fall back if it fails. Learner evidence at the checkpoint: highlighting failed in both Chrome and Firefox. Evidence over preference — sequential became primary.
+3. **Deferred option:** boundary-event highlighting (natural pacing) can return later if a target browser proves reliable; it stays a measured optimization, not a dependency.
+4. **Rules:** question text only; highlight clears when speech ends; replay = tap again; tap during speech stops it; speech stops automatically on Check/Next; if `speechSynthesis` is unavailable or the first word fails to utter — friendly message, question fully usable, nothing else blocked.
 5. Purely client-side; no browser-specific behavior affects grading or practice.
 
 ## API Contracts
@@ -215,7 +215,7 @@ None beyond the stack above: no external APIs, no database service, no hosting, 
 1. **Server-side persistence** (Flask + SQLite, browser-side `device_id`) instead of localStorage-only — chosen to exercise the Vue↔Flask boundary and make the demo show real round-trips. Tradeoff accepted: slightly more moving parts.
 2. **Flask as the grading authority** — questions served without answers, `POST /api/check` grades, honey + cap server-enforced; the client genuinely cannot peek.
 3. **Demo mode via environment variable** (`PERCEPTRON_DEMO=1`, cap 15) — no user-facing toggle.
-4. **Read aloud primary = `onboundary` events**, verified early in build; documented fallback = sequential per-word utterances. The app must not depend on one browser for basic maths practice.
+4. **Read aloud = deterministic per-word utterances as primary** (revised at the Slice-3 checkpoint after boundary events failed in both the learner's Chrome and Firefox; documented fallback became primary, per the recorded verification-first rule). The app does not depend on one browser for basic maths practice.
 5. **Dev = Vite :5173 + Flask :5000 with `/api` proxy; demo = one Flask process serving built static files.** `fetch('/api/...')` everywhere; JSON in/out; no extra libs.
 6. **Server-side integrity (four learner corrections at spec review):** cap-reset dates are validated against the server clock; honey rewards are idempotent per question; placement progress is persisted per question with skipped ≠ wrong and refresh-resume; all API errors share one `{error:{code, description}}` envelope that never leaks internals and never mutates progress.
 7. **Conventions (learner-set):** Prettier, no code comments, small components, clean Flask separation; corrections preserve the architecture, scope, and no-new-deps stance.
@@ -225,4 +225,4 @@ None beyond the stack above: no external APIs, no database service, no hosting, 
 - Daily reset compares the client-sent local date against the stored `today_date`.
 - Hint step auto-advances on wrong checks (PRD behavior), `POST /api/hint` only for tap-without-wrong-try.
 
-**Agreed small investigation (the genuine unknown):** whether `onboundary` fires reliably with usable `charIndex` in the recording browser. Evidence needed during build: see `Speech-Highlighting Strategy` step 2 — if it fails, switch to the sequential fallback and note it in `5-build`'s record. Nothing else in the plan depends on this choice.
+**Agreed small investigation — resolved:** whether `onboundary` fires reliably with usable `charIndex` in the recording browser. Evidence: it did not (learner report, Chrome + Firefox, Slice-3 checkpoint). Outcome: deterministic sequential per-word speech became primary; see `Speech-Highlighting Strategy`.
