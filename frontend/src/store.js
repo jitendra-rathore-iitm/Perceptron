@@ -5,6 +5,7 @@ import {
   getPracticeQuestion,
   resetProgress,
   revealHint,
+  savePreferences,
   startSession,
   submitPlacementAnswer,
 } from "./api";
@@ -48,8 +49,20 @@ export const store = reactive({
   placementIndex: 0,
   placementBusy: false,
   placementResult: null,
+  dyslexiaPanelOpen: false,
+  breakActive: false,
   loadError: null,
 });
+
+export async function toggleDyslexia() {
+  store.dyslexia = !store.dyslexia;
+  try {
+    await savePreferences(store.deviceId, store.dyslexia);
+    store.loadError = null;
+  } catch (error) {
+    store.loadError = error.message;
+  }
+}
 
 export async function restoreSession() {
   try {

@@ -1,8 +1,10 @@
 <script setup>
 import { ref, watch } from "vue";
+import DyslexiaPanel from "./DyslexiaPanel.vue";
 import { store } from "../store";
 
 const bump = ref(false);
+const panelOpen = ref(false);
 
 watch(
   () => store.honeyTotal,
@@ -27,8 +29,11 @@ watch(
       type="button"
       title="Dyslexia panel"
       aria-label="Dyslexia panel"
+      :aria-expanded="panelOpen"
+      @click="panelOpen = !panelOpen"
     >
       Dyslexia
     </button>
   </nav>
+  <DyslexiaPanel v-if="panelOpen" />
 </template>

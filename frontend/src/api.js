@@ -76,3 +76,10 @@ export function resetProgress(deviceId) {
     body: JSON.stringify({ deviceId }),
   });
 }
+
+export function savePreferences(deviceId, dyslexia) {
+  return request("/api/preferences", {
+    method: "POST",
+    body: JSON.stringify({ deviceId, dyslexia }),
+  });
+}

@@ -69,7 +69,7 @@ Build mode: learn (learner asked for step-by-step building with verification and
   Learner check: Play through a few questions at each level and grade their clarity, hint quality, and tooth-fairness as a student would.
   Commit: `Slice 6: complete authored question banks`
 
-- [ ] **7. Dyslexia panel + breathing break**
+- [x] **7. Dyslexia panel + breathing break**
   Becomes usable: One tap in the panel flips font/spacing/size/motion app-wide immediately (and it survives refresh); the break overlay shows the still, calm breathing card with Keep going back to the exact question; reduced motion removes all animation.
   Why now: Both are always-available accessibility surfaces named in the kernel; with backends done, this polish is safe.
   PRD ref: `prd.md > Dyslexia Panel`, `prd.md > Take a Break`

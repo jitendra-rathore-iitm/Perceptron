@@ -123,6 +123,22 @@ def placement_answer():
     return jsonify({"done": True, "placedLevel": placed})
 
 
+@app.post("/api/preferences")
+def preferences():
+    body = request.get_json(silent=True)
+    if not isinstance(body, dict):
+        return error("bad_request", "Send JSON like {deviceId, dyslexia}.", 400)
+    found, err = require_student(body.get("deviceId"))
+    if err:
+        return err
+    device_id = found[0]
+    dyslexia = body.get("dyslexia")
+    if not isinstance(dyslexia, bool):
+        return error("bad_request", "dyslexia must be true or false.", 400)
+    state.set_dyslexia(device_id, dyslexia)
+    return jsonify({"dyslexia": dyslexia})
+
+
 @app.post("/api/reset")
 def reset():
     body = request.get_json(silent=True)

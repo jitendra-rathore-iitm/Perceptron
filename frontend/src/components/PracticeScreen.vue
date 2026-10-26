@@ -80,6 +80,13 @@ function toggleReadAloud() {
       >
         Hint
       </button>
+      <button
+        class="btn break-btn"
+        type="button"
+        @click="store.breakActive = true"
+      >
+        Take a break
+      </button>
       <p v-if="solved" class="message">Nice work.</p>
       <p v-if="store.verdict?.capped" class="message">
         Done for today. Come back tomorrow.
