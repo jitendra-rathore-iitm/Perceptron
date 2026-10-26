@@ -115,9 +115,276 @@
           "With 3 grey pets out of 8, the fraction of grey pets is 3/8 — the part on top, the whole underneath."
         ],
         "explanation": "7 of the 10 pets are cats, so the fraction is 7/10."
+      },
+      {
+        "id": "l1-09",
+        "level": 1,
+        "text": "A chocolate bar has 8 equal pieces. Ria eats 3 pieces. What fraction of the bar is left?",
+        "options": ["3/8", "5/8", "8/5", "1/5"],
+        "correct": 1,
+        "hints": [
+          "How many pieces were eaten, and how many were there to start with?",
+          "Pieces left over the pieces in the whole bar.",
+          "If 2 of 8 pieces are eaten, 6 are left, so the fraction left is 6/8 — part first, whole second."
+        ],
+        "explanation": "5 of the 8 pieces are left, so the fraction left is 5/8."
+      },
+      {
+        "id": "l1-10",
+        "level": 1,
+        "text": "One day has 24 hours. What fraction of a day is 1 hour?",
+        "options": ["1/24", "1/12", "1/60", "24/1"],
+        "correct": 0,
+        "hints": [
+          "Which number is the part, and which is the whole?",
+          "One hour over all the hours in a day.",
+          "One minute over 60 minutes is 1/60 — one part out of the whole. Here the whole is 24 hours."
+        ],
+        "explanation": "1 hour out of the 24 in a day, so the fraction is 1/24."
+      },
+      {
+        "id": "l1-11",
+        "level": 1,
+        "text": "In the fraction 2/5, what does the 2 mean?",
+        "options": [
+          "How many parts are being talked about",
+          "How many parts the whole was split into",
+          "How many wholes there are",
+          "The bottom number"
+        ],
+        "correct": 0,
+        "hints": [
+          "Compare the two numbers in 2/5: which one counts the part, and which one counts the whole?",
+          "The top number counts the parts being taken or shaded.",
+          "In 3/8, the 3 says three parts are taken. The top number always counts the parts talked about."
+        ],
+        "explanation": "The 2 counts the parts taken, while the 5 counts all the parts in the whole."
+      },
+      {
+        "id": "l1-12",
+        "level": 1,
+        "text": "Which is bigger: 3/4 or 3/8?",
+        "options": ["3/8", "3/4", "They are equal", "You cannot compare them"],
+        "correct": 1,
+        "hints": [
+          "Both fractions count three parts. Which whole is split into fewer parts?",
+          "Fewer parts in the whole means each part is bigger.",
+          "Between 3/6 and 3/10, the sixths are bigger pieces, so 3/6 is bigger. Fewer pieces means bigger pieces."
+        ],
+        "explanation": "Quarters are bigger pieces than eighths, so 3/4 is bigger than 3/8."
       }
     ],
-    "2": [],
-    "3": []
+    "2": [
+      {
+        "id": "l2-01",
+        "level": 2,
+        "text": "Which fraction is equal to 1/2?",
+        "options": ["1/4", "3/4", "2/4", "4/2"],
+        "correct": 2,
+        "hints": [
+          "Doubling the bottom number, what must you do to the top to keep the fraction fair?",
+          "Whatever you multiply the bottom by, multiply the top by too.",
+          "1/2 is also 3/6: top and bottom both times 3. Here, times 2 gives 2/4."
+        ],
+        "explanation": "Doubling both the top and the bottom keeps 1/2 the same, and 2/4 is that doubled form."
+      },
+      {
+        "id": "l2-02",
+        "level": 2,
+        "text": "What is 1/3 + 1/3?",
+        "options": ["1/6", "2/3", "2/6", "3/2"],
+        "correct": 1,
+        "hints": [
+          "Adding thirds is like adding apples counted in thirds.",
+          "Add the top numbers and keep the bottom number the same.",
+          "3/eighths + 2/eighths = 5/eighths, written 5/8. Same idea: 1 third + 1 third = 2 thirds."
+        ],
+        "explanation": "1 third plus 1 third is 2 thirds, so the answer is 2/3."
+      },
+      {
+        "id": "l2-03",
+        "level": 2,
+        "text": "What is 3/8 - 1/8?",
+        "options": ["2/8", "2/0", "4/8", "3/8"],
+        "correct": 0,
+        "hints": [
+          "Take away one eighth from three eighths.",
+          "Subtract the top numbers and keep the bottom number the same.",
+          "5/ninths - 2/ninths = 3/ninths, written 3/9. Same idea here with eighths."
+        ],
+        "explanation": "Three eighths take away one eighth leaves two eighths, written 2/8."
+      },
+      {
+        "id": "l2-04",
+        "level": 2,
+        "text": "Which fraction is equal to 2/6?",
+        "options": ["2/3", "4/6", "6/2", "1/3"],
+        "correct": 3,
+        "hints": [
+          "What single number divides both the top and the bottom of 2/6?",
+          "Dividing top and bottom by the same number keeps the fraction fair.",
+          "2/4 divided by 2 gives 1/2 — both numbers shrink together. Two divided by two gives 1, and six divided by two gives 3."
+        ],
+        "explanation": "Dividing both parts of 2/6 by 2 gives 1/3."
+      },
+      {
+        "id": "l2-05",
+        "level": 2,
+        "text": "What is 5/10 + 5/10?",
+        "options": ["10/10", "5/20", "11/10", "1/2"],
+        "correct": 0,
+        "hints": [
+          "You are adding two equal groups of tenths.",
+          "Add the top numbers and keep the bottom the same.",
+          "2/fifths + 2/fifths = 4/fifths. Here: 5 tenths plus 5 tenths makes 10 tenths."
+        ],
+        "explanation": "Ten tenths is the whole thing, so the answer is 10/10."
+      },
+      {
+        "id": "l2-06",
+        "level": 2,
+        "text": "What is 7/9 - 4/9?",
+        "options": ["3/18", "4/9", "11/18", "3/9"],
+        "correct": 3,
+        "hints": [
+          "Subtract four ninths from seven ninths.",
+          "Subtract the top numbers and keep the bottom number the same.",
+          "8/ninths - 6/ninths = 2/ninths. Here: 7 ninths minus 4 ninths leaves 3 ninths."
+        ],
+        "explanation": "Seven ninths take away four ninths is three ninths, written 3/9."
+      },
+      {
+        "id": "l2-07",
+        "level": 2,
+        "text": "Which fraction is the same as 3/5?",
+        "options": ["9/10", "3/10", "6/10", "8/15"],
+        "correct": 2,
+        "hints": [
+          "Times the bottom by 2 to make tenths. What happens to the top?",
+          "Whatever you multiply the bottom by, multiply the top by too.",
+          "1/5 is also 2/10, because both numbers times 2. So 3/5 is also 6/10."
+        ],
+        "explanation": "Doubling both numbers turns 3/5 into 6/10 with no change in value."
+      },
+      {
+        "id": "l2-08",
+        "level": 2,
+        "text": "Which fraction is equal to 4/6?",
+        "options": ["4/12", "6/4", "8/6", "8/12"],
+        "correct": 3,
+        "hints": [
+          "Times both numbers of 4/6 by the same number.",
+          "Doubling is the easiest move: top times 2 and bottom times 2.",
+          "1/2 doubled is 2/4. Here, 4/6 doubled is 8/12."
+        ],
+        "explanation": "Doubling both numbers turns 4/6 into 8/12 with no change in value."
+      }
+    ],
+    "3": [
+      {
+        "id": "l3-01",
+        "level": 3,
+        "text": "What is 1/2 + 1/4?",
+        "options": ["2/6", "1/4", "1/8", "3/4"],
+        "correct": 3,
+        "hints": [
+          "The bottoms are different. Can you make them match?",
+          "Write 1/2 as 2/4, then add quarters.",
+          "1/3 + 1/6 becomes 2/6 + 1/6. Match the bottoms first, then add the tops."
+        ],
+        "explanation": "1/2 is 2/4, and 2/4 + 1/4 = 3/4."
+      },
+      {
+        "id": "l3-02",
+        "level": 3,
+        "text": "What is 1/3 + 1/6?",
+        "options": ["2/3", "2/9", "3/6", "1/9"],
+        "correct": 2,
+        "hints": [
+          "Sixths are made by cutting thirds in half again.",
+          "Turn 1/3 into 2/6, then add the sixths.",
+          "1/2 + 1/8 works as 4/8 + 1/8. Match the bottoms first, then add the tops."
+        ],
+        "explanation": "1/3 is 2/6, and 2/6 + 1/6 = 3/6."
+      },
+      {
+        "id": "l3-03",
+        "level": 3,
+        "text": "What is 3/4 - 1/2?",
+        "options": ["1/4", "1/2", "1/8", "4/2"],
+        "correct": 0,
+        "hints": [
+          "Write 1/2 so it counts fourths, like 3/4 does.",
+          "1/2 is 2/4, so subtract 2/4 from 3/4.",
+          "2/3 - 1/6 works as 4/6 - 1/6. Match the bottoms, then subtract the tops."
+        ],
+        "explanation": "1/2 is 2/4, and 3/4 - 2/4 = 1/4."
+      },
+      {
+        "id": "l3-04",
+        "level": 3,
+        "text": "What is 2/3 - 1/6?",
+        "options": ["1/6", "5/6", "1/2", "2/18"],
+        "correct": 2,
+        "hints": [
+          "Count everything in sixths.",
+          "2/3 is 4/6, so subtract 1/6 from 4/6.",
+          "1/2 - 1/8 works as 4/8 - 1/8. Match the bottoms first, then subtract the tops."
+        ],
+        "explanation": "2/3 is 4/6, and 4/6 - 1/6 = 3/6, which is 1/2."
+      },
+      {
+        "id": "l3-05",
+        "level": 3,
+        "text": "What is 1/2 x 3/4?",
+        "options": ["3/6", "3/8", "2/6", "4/6"],
+        "correct": 1,
+        "hints": [
+          "Multiplying halves by quarters multiplies the numbers on top, and the numbers underneath.",
+          "Multiply straight across: top times top, bottom times bottom.",
+          "1/2 x 1/5 = 1/10, because 1 x 1 = 1 and 2 x 5 = 10. Same rule."
+        ],
+        "explanation": "Top times top: 1 x 3 = 3. Bottom times bottom: 2 x 4 = 8. So the answer is 3/8."
+      },
+      {
+        "id": "l3-06",
+        "level": 3,
+        "text": "What is 2/3 x 2/5?",
+        "options": ["4/8", "4/10", "4/15", "9/15"],
+        "correct": 2,
+        "hints": [
+          "Multiplying fractions does not need matching bottoms.",
+          "Multiply straight across: top times top, bottom times bottom.",
+          "1/2 x 3/5 = 3/10, because 1 x 3 = 3 and 2 x 5 = 10."
+        ],
+        "explanation": "Top times top: 2 x 2 = 4. Bottom times bottom: 3 x 5 = 15. So the answer is 4/15."
+      },
+      {
+        "id": "l3-07",
+        "level": 3,
+        "text": "What is 3/5 - 1/10?",
+        "options": ["2/5", "1/2", "3/10", "1/10"],
+        "correct": 1,
+        "hints": [
+          "Write both fractions as tenths.",
+          "3/5 is 6/10, so subtract 1/10 from 6/10.",
+          "4/5 - 3/10 works as 8/10 - 3/10. Match the bottoms, then subtract the tops."
+        ],
+        "explanation": "3/5 is 6/10, and 6/10 - 1/10 = 5/10, which is 1/2."
+      },
+      {
+        "id": "l3-08",
+        "level": 3,
+        "text": "What is 1/2 + 1/3?",
+        "options": ["2/5", "1/6", "3/2", "5/6"],
+        "correct": 3,
+        "hints": [
+          "Sixths can be shared by both: 1/2 and 1/3 both turn into sixths.",
+          "1/2 is 3/6 and 1/3 is 2/6, so add the sixths.",
+          "1/2 + 1/5 works as 5/10 + 2/10. Match the bottoms first, then add the tops."
+        ],
+        "explanation": "1/2 is 3/6 and 1/3 is 2/6, so the total is 3/6 + 2/6 = 5/6."
+      }
+    ]
   }
 }

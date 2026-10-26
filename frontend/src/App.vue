@@ -14,4 +14,5 @@ onMounted(() => {
   <main class="page">
     <PracticeScreen v-if="store.screen === 'practice'" />
   </main>
+  <footer class="footer">Made with love by Jitendra</footer>
 </template>
