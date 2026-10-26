@@ -1,6 +1,6 @@
 from datetime import date
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 
 import os
 
@@ -8,6 +8,10 @@ import questions
 import state
 
 app = Flask(__name__)
+
+DIST = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "frontend", "dist"
+)
 
 _counts = questions.bank_counts()
 print(
@@ -221,8 +225,24 @@ def hint():
     return jsonify(questions.hint_step(device_id, question_id))
 
 
+if os.path.isdir(DIST):
+
+    @app.get("/")
+    def index():
+        return send_from_directory(DIST, "index.html")
+
+    @app.get("/<path:path>")
+    def static_files(path):
+        if path.startswith("api/"):
+            return error("bad_request", "Unknown API endpoint.", 404)
+        full = os.path.join(DIST, path)
+        if os.path.isfile(full):
+            return send_from_directory(DIST, path)
+        return send_from_directory(DIST, "index.html")
+
+
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 10000))
+    port = int(os.environ.get("PORT", 5000))
     app.run(
         host="0.0.0.0",
         port=port,

@@ -79,7 +79,7 @@ Build mode: learn (learner asked for step-by-step building with verification and
   Learner check: Toggle the panel and feel the whole app change; open the break screen while mid-question, keep something honeyed going on, and return to the exact same question.
   Commit: `Slice 7: dyslexia panel and breathing break`
 
-- [ ] **8. Demo build: one process, camera-ready**
+- [x] **8. Demo build: one process, camera-ready**
   Becomes usable: `npm run build` outputs `frontend/dist`; Flask serves the built app + API from one process on :5000; error envelope polish is consistent everywhere; the whole 60-second demo script runs start to finish.
   Why now: This converts dev-mode scaffolding into the recorded demo path and sweeps the acceptance criteria before final review.
   PRD ref: `prd.md > What "Working" Looks Like`, `prd.md > Acceptance criteria`
@@ -120,3 +120,5 @@ Activity mode: [to record at wrap-up]
 - [Deployment pulled forward from its stretch-goal slot at the learner's request: Vercel frontend + Render free-tier API, connected by a `vercel.json` rewrite so the frontend's relative `/api` addresses work unchanged in every environment] — verified against vercel.com/docs/rewrites and render.com/docs/free; no plan-level scope change (the stretch goal is simply being used), and the SQLite spin-down reset on Render free tier is recorded in spec.md instead of silently accepted.
 - [Slice 6 recycle check adapted: the "9 fetches all unique" test runs on Level 1 (12 questions after the pull-forward); the 8-question levels prove recycling by repeating only after the full pool is seen (8 unique + 1 repeat)] — an 8-question bank cannot yield 9 consecutive unique questions; the shuffle-recycle rule itself is unchanged.
 - [Startup count check reports the real bank (6 placement + 28 practice: L1 12, L2 8, L3 8) and warns below 6 + 8-per-level rather than asserting exactly 6 + 24] — the earlier pull-forward added 4 Level 1 questions, so a hard 24 assertion would fail on a healthy bank.
+- [Local demo port default changed 10000 → 5000 to match the spec's "open localhost:5000"; Render still binds the PORT env var it injects] — the 10000 default was a Render-ism that leaked into local dev; the env var wins wherever the platform sets one.
+- [Read-aloud word-highlight criterion verified via its fallback path in the automated sweep: headless Chrome has no TTS voices, so the sweep asserts the friendly "not available" note appears and the question stays fully usable] — per the spec's fallback rule; the highlight itself was learner-verified at the Slice 2/3 checkpoints and needs one eyes-on pass on real hardware before recording.
