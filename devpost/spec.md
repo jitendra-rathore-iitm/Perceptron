@@ -50,7 +50,7 @@ Unverified: current major versions will be pinned at build start (`npm`/`pip` in
 - Prereqs: Python 3 (+ `pip install -r backend/requirements.txt`), Node.js (+ `npm install` in `frontend/`).
 - Dev: terminal 1 `flask run` (or `python app.py`) → API on `:5000`; terminal 2 `npm run dev` in `frontend/` → open **http://localhost:5173** and use the app.
 - Demo recording: `npm run build` in `frontend/`, then run Flask alone → open **http://localhost:5000** (one process, static frontend + API). Demo mode: start Flask with `PERCEPTRON_DEMO=1` so the daily cap is 15.
-- Submission needs a short demo video and a public GitHub repository. **Deployment is optional** (scope: stretch goal); local recording satisfies the requirement. No API keys or paid services exist.
+- Submission needs a short demo video and a public GitHub repository. No API keys or paid services exist. **Deployment was pulled forward at the learner's request** (scope listed it as a stretch goal): frontend on Vercel, API on Render free tier. `frontend/vercel.json` rewrites `/api/*` to the Render URL (per vercel.com/docs/rewrites), so the frontend keeps its relative `/api` addresses everywhere — dev, localhost production, and Vercel — with no CORS code. Two free-tier facts, confirmed from render.com/docs/free and render.com/docs/disks: the filesystem is ephemeral (SQLite resets on redeploys/restarts/spin-downs), and free services spin down after ~15 minutes idle (first request after a sleep is slow, and the database starts empty again). Demo recording still works on Render if done right after traffic arrives (open the page, wait for the first question to load, then record); local recording from `localhost:5000` remains the fallback with no caveats.
 
 ## Look and Feel
 
@@ -191,7 +191,7 @@ Perceptron/
 
 ## External Services and Dependencies
 
-None beyond the stack above: no external APIs, no database service, no hosting, no keys, no accounts, no paid plans. All data is local (SQLite file + JSON bank). Speech synthesis is the browser's own.
+None beyond the stack above: no external data APIs, no database service, no API keys, no accounts, no paid plans. Build-time and local data are all local (SQLite file + JSON bank), and speech synthesis is the browser's own. Deployed hosting uses only free tiers (Vercel static frontend, Render web service); its trade-off is the documented SQLite spin-down reset above, not new services beyond those two.
 
 ## Important Failure Modes
 
