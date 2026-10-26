@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Perceptron — App Map</title>
+<style>
+  :root { --black:#000; --paper:#fffdf5; --yellow:#ffd23f; --sky:#74b9ff; --green:#88d498; --orange:#ffa552; --lavender:#b8a9fa; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: Arial, sans-serif; font-size:18px; line-height:1.55; background:var(--paper); color:var(--black); padding:32px 16px 64px; }
+  main { max-width: 880px; margin: 0 auto; }
+  h1 { font-size: 32px; border-bottom: 4px solid var(--black); display:inline-block; padding-bottom:4px; }
+  h2 { font-size: 22px; margin-top: 36px; }
+  .card { border:3px solid var(--black); border-radius:12px; box-shadow:5px 5px 0 var(--black); background:#fff; padding:16px 20px; margin:14px 0; }
+  .file { font-family: ui-monospace, Menlo, Consolas, monospace; font-size:16px; font-weight:bold; }
+  .tag { display:inline-block; border:2px solid var(--black); border-radius:8px; padding:1px 10px; font-size:14px; font-weight:bold; margin-left:8px; vertical-align:middle; }
+  .vue { background: var(--green); } .flask { background: var(--orange); } .both { background: var(--sky); } .doc { background: var(--lavender); }
+  ul { margin: 8px 0 0; padding-left: 22px; }
+  .journey { border-left:6px solid var(--black); padding-left:16px; }
+  .practice { margin-top:28px; border:3px solid var(--black); border-radius:12px; background:var(--yellow); padding:16px 20px; box-shadow:5px 5px 0 var(--black); }
+  a { color: var(--black); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Perceptron — App Map</h1>
+  <p>Where everything lives, drawn from the finished code. Start at the top left (browser) and follow a tap to the right (Flask) and back.</p>
+
+  <h2>The request path — one tap through the app</h2>
+  <div class="card"><span class="file">frontend/src/components/AnswerCard.vue</span><span class="tag vue">Vue</span>
+    <ul><li>A big tappable option. Sets <code>store.selected</code>; nothing is judged yet.</li></ul></div>
+  <div class="card"><span class="file">frontend/src/components/PracticeScreen.vue</span><span class="tag vue">Vue</span>
+    <ul><li>The core loop screen: question + Read aloud, answers, Check, Hint, Take a break. Shows the verdict state (soft green / lavender / revealed).</li></ul></div>
+  <div class="card"><span class="file">frontend/src/store.js</span><span class="tag vue">Vue</span>
+    <ul><li>One reactive object holding honey, level, dyslexia, the current question — plus the actions (<code>submitAnswer</code>, <code>startPlacement</code>, <code>restoreSession</code>…) that call api.js. No Pinia, on purpose.</li></ul></div>
+  <div class="card"><span class="file">frontend/src/api.js</span><span class="tag vue">Vue</span>
+    <ul><li>Every <code>fetch('/api/...')</code> in one module; maps error codes (<code>unknown_question</code>, <code>unknown_device</code>…) to friendly sentences.</li></ul></div>
+  <div class="card"><span class="file">backend/app.py</span><span class="tag flask">Flask</span>
+    <ul><li>Routes + validation: <code>/api/session</code>, <code>/api/placement/*</code>, <code>/api/practice/question</code>, <code>/api/check</code>, <code>/api/hint</code>, <code>/api/preferences</code>, <code>/api/reset</code>. One error envelope <code>{error:{code, description}}</code>, never a stack trace. Serves <code>frontend/dist</code> in the single-process demo.</li></ul></div>
+  <div class="card"><span class="file">backend/questions.py</span><span class="tag flask">Flask</span>
+    <ul><li>The referee: grades answers, advances hints (nudge → first step → worked example → reveal), awards 5/3/0 honey against the daily cap, picks unseen questions and recycles the bank. Correct answers never leave here before you submit.</li></ul></div>
+  <div class="card"><span class="file">backend/state.py</span><span class="tag flask">Flask</span>
+    <ul><li>SQLite only: <code>students</code>, <code>placement_answers</code>, <code>seen_questions</code>, <code>attempts</code>. Every query parameterized. Created automatically on first run.</li></ul></div>
+  <div class="card"><span class="file">backend/data/fractions.json</span><span class="tag doc">Content</span>
+    <ul><li>6 placement + 28 practice questions, each with three authored hints and an explanation. Malformed entries are skipped at load; the count prints at startup.</li></ul></div>
+
+  <h2>The kernel — where the accessibility promise lives</h2>
+  <div class="card"><span class="file">frontend/src/speech.js</span><span class="tag vue">Vue</span>
+    <ul><li>Read aloud: each word spoken as its own utterance, highlighted <em>before</em> it speaks; stops on Check/Next; friendly fallback when the browser can't speak.</li></ul></div>
+  <div class="card"><span class="file">frontend/src/components/DyslexiaPanel.vue + main.js</span><span class="tag vue">Vue</span>
+    <ul><li>One switch flips <code>data-dyslexia</code> on <code>&lt;html&gt;</code> — font, spacing, size and motion change together via CSS variables in <code>styles/base.css</code> — and posts the preference so it survives refresh.</li></ul></div>
+  <div class="card"><span class="file">frontend/src/components/BreakOverlay.vue</span><span class="tag vue">Vue</span>
+    <ul><li>Full-screen calm card, breathing circle, no timer; <em>Keep going</em> returns to the exact question. Reduced motion = static circle, text only.</li></ul></div>
+
+  <h2>Rules worth remembering (reusable practice)</h2>
+  <ul class="journey">
+    <li><strong>The server owns the truth.</strong> Grading, honey, caps and hint progression live in Flask; the client only asks. Reward idempotency is keyed to the attempt row, so double-taps can't double-pay.</li>
+    <li><strong>Dates you didn't generate are lies until checked.</strong> The client's "today" is only honored inside the ±1-day window any real UTC offset could produce — a forged date can't reset the cap.</li>
+    <li><strong>One error shape everywhere.</strong> Every failure is <code>{error:{code, description}}</code>; the frontend maps codes to friendly text, so users never see a stack trace.</li>
+    <li><strong>Small slices beat big plans.</strong> This shipped as eight end-to-end slices, each verified (curl walks, then Playwright) before the next began.</li>
+  </ul>
+
+  <p class="practice"><strong>Try this next time:</strong> before writing any handler, write its failing-request tests first — bad selection, unknown question, unknown device, forged date. The four corrections that shaped this app all came from asking "what if the client lies?"</p>
+</main>
+</body>
+</html>

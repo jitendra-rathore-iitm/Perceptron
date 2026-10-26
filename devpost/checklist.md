@@ -91,24 +91,24 @@ Build mode: learn (learner asked for step-by-step building with verification and
 
 ## Hands-on Checkpoints
 
-- [ ] Early usable behavior explored — after Slice 3: try the full practice experience (question, answers, read-aloud, hints, reveal) and give feedback before infrastructure work (Slice 4+) continues.
-- [ ] Final kick-the-tires exploration and feedback completed — after Slice 8, before revision work.
+- [x] Early usable behavior explored — after Slice 3: try the full practice experience (question, answers, read-aloud, hints, reveal) and give feedback before infrastructure work (Slice 4+) continues. (Evidence: Revisions record the slice-3 checkpoint feedback — NeoFlux visual pass, navbar copy, speech-strategy flip.)
+- [ ] Final kick-the-tires exploration and feedback completed — after Slice 8, before revision work. (Agent-side automated acceptance sweep complete — 25/25 against the single-process demo build — but the learner's own eyes-on pass is still owed; fold it into the demo-video recording session.)
 
 ## Final Review
 
-- [ ] Final review complete — feedback resolved and learner confirms ready to ship
+- [ ] Final review complete — feedback resolved and learner confirms ready to ship (blocked on the learner: code review and security sweep done agent-side; see final report — learner confirms after their kick-the-tires pass)
 
 ## Code Tour and App Map
 
 - [ ] Learning activity complete — guided route, focused alternative, prior practice connected, or brief recap
 - [ ] Optional edit and transfer reflection addressed — offered/declined/already covered/not applicable as appropriate
-- [ ] `devpost/app-map.html` generated from finished code, checked, and shown, including a project-grounded practice to reuse
+- [x] `devpost/app-map.html` generated from finished code, checked, and shown, including a project-grounded practice to reuse
 
-Activity and evidence: [to record at wrap-up]
-Route and stops: [to record at wrap-up]
-Edit outcome: [to record at wrap-up]
-Reflection: [to record at wrap-up]
-Activity mode: [to record at wrap-up]
+Activity and evidence: agent-generated app map from the finished code; guided-tour conversation still owed to the learner (learner-profile.md absent from devpost/ — desired-learning-outcome conversation never recorded).
+Route and stops: index.html → main.js (data-dyslexia watcher) → App.vue (screens) → store.js (actions) → api.js (fetch) → Flask app.py (routes/validation) → questions.py (grading) → state.py (SQLite); speech.js and the Vue components as the client-side kernel.
+Edit outcome: not attempted agent-side — offered to learner at wrap-up.
+Reflection: pending learner.
+Activity mode: recap map generated; hands-on tour deferred to learner.
 
 ## Revisions
 
