@@ -54,6 +54,7 @@ function speakEachWord() {
     }
     speech.highlightIndex = index;
     const utterance = new SpeechSynthesisUtterance(speech.words[index].text);
+    utterance.rate = 1.15;
     utterance.onend = () => {
       if (stopped) return;
       index += 1;

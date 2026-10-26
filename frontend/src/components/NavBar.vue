@@ -21,7 +21,14 @@ watch(
 <template>
   <nav class="navbar">
     <span class="logo">Perceptron</span>
-    <span :class="['honey', { bump }]">{{ store.honeyTotal }} drops</span>
-    <button class="panel-btn" type="button" title="Dyslexia panel">aA</button>
+    <span :class="['honey', { bump }]">Honey: {{ store.honeyTotal }}</span>
+    <button
+      class="panel-btn"
+      type="button"
+      title="Dyslexia panel"
+      aria-label="Dyslexia panel"
+    >
+      Dyslexia
+    </button>
   </nav>
 </template>
