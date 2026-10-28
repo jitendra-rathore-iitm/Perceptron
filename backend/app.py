@@ -36,6 +36,10 @@ def require_student(body_device_id):
         return None, error("unknown_device", "We don't know this device. Refresh to start fresh.", 404)
     return (device_id, student), None
 
+@app.route("/api/health")
+def health():
+    return "OK", 200
+
 
 @app.errorhandler(Exception)
 def server_error(exc):
